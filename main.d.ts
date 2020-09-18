@@ -21,7 +21,7 @@ export interface YouTubeProps {
   onChangeState?: (event: {state: State, target: number}) => void;
   onChangeQuality?: () => void;
   onChangeFullscreen?: (event: any) => void;
-  onProgress?: (event: any) => void;
+  onProgress?: (event: {currentTime: number, target: number}) => void;
   style?: StyleProp<ViewStyle>;
 }
 
