@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 
+export type State = 'unknown' | 'unstarted' | 'queued' | 'buffering' | 'playing' | 'paused' | 'ended';
+
 export interface YouTubeProps {
   apiKey: string;
   videoId?: string;
@@ -17,10 +19,10 @@ export interface YouTubeProps {
   origin?: string;
   onError?: (event: any) => void;
   onReady?: (event: any) => void;
-  onChangeState?: () => void;
+  onChangeState?: (event: {state: State, target: number}) => void;
   onChangeQuality?: () => void;
   onChangeFullscreen?: (event: any) => void;
-  onProgress?: (event: any) => void;
+  onProgress?: (event: {currentTime: number, target: number}) => void;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -32,6 +34,8 @@ declare class YouTube extends React.Component<YouTubeProps> {
   getVideosIndex(): Promise<number>;
   getCurrentTime(): Promise<number>;
   getDuration(): Promise<number>;
+  getPlaybackRate(): number;
+  setPlaybackRate(rate: number): void;
   reloadIframe(): void;
 }
 
